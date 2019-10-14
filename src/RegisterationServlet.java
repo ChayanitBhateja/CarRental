@@ -50,6 +50,7 @@ public class RegisterationServlet extends HttpServlet {
 		out.println("reached1");
 		//validate and register..
 		Operations operate = new Operations();
+		out.println("reached test");
 		try {
 			if(operate.usernameCheck(username) &&
 			operate.mobileCheck(mobile) &&

@@ -7,6 +7,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
@@ -20,7 +24,10 @@ public class Operations {
 	private Session session=null;
 	private Transaction tx=null;
 	public Operations() {
-		factory= new Configuration().configure().buildSessionFactory();
+		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
+		 Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
+		  
+		factory = meta.getSessionFactoryBuilder().build(); 
 	}
 	public boolean mobileCheck(String mobileno) throws WrongNumberException{ 
 		int num = Integer.parseInt(mobileno);
