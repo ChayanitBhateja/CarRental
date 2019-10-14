@@ -43,9 +43,8 @@ public class RegisterationServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String aadharno = request.getParameter("aadhar");
 		String licenseno = request.getParameter("license");
-		//create a validation class...
-		//create exceptions in it..
-		//send data from here for validation..
+		//create exceptions...
+		//validate and register
 		
 		
 		
