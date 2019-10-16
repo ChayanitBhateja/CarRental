@@ -11,7 +11,6 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import exception.InvalidAadharException;
@@ -50,7 +49,7 @@ public class Operations {
 		try{
 			session=factory.openSession();
 			tx = session.beginTransaction();
-			Query<User> query = session.createQuery("from username where tbl_reguser_username:u");
+			Query<User> query = session.createQuery("select tbl.tbl_reguser_username from tbl_reguser tbl where tbl.tbl_reguser_username=:u");
 			query.setParameter("u",username);
 			list = query.list();
 			tx.commit();

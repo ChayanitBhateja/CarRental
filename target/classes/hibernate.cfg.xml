@@ -12,6 +12,6 @@
         <property name="connection.password">password</property>    
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>   
        
-        <mapping class="com.javatpoint.mypackage.Employee"/>  
+        <mapping class="pkg.User" />  
     </session-factory>  
 </hibernate-configuration>  

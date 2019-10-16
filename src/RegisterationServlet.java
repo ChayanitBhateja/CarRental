@@ -48,7 +48,6 @@ public class RegisterationServlet extends HttpServlet {
 		String licenseno = request.getParameter("license");
 		boolean flag=false;
 		out.println("reached1");
-		//validate and register..
 		Operations operate = new Operations();
 		out.println("reached test");
 		try {
