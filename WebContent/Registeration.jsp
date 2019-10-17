@@ -70,7 +70,7 @@
 			</tr>
 			<tr>
 				<td>
-					<a href="/login.html">Already a User?</a>
+					<a href="/CarRental/Login.html">Already a User?</a>
 				</td>
 			</tr>
 		</TABLE>

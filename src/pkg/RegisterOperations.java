@@ -18,15 +18,14 @@ import exception.InvalidAadharException;
 import exception.UserExistException;
 import exception.WrongNumberException;
 
-public class Operations {
+public class RegisterOperations {
 	
 	private static SessionFactory factory;
 	private Session session=null;
 	private Transaction tx=null;
-	public Operations() {
+	public RegisterOperations() {
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
 		 Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
-		  
 		factory = meta.getSessionFactoryBuilder().build(); 
 	}
 	public boolean mobileCheck(String mobileno) throws WrongNumberException{ 

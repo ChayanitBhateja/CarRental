@@ -15,7 +15,7 @@ import exception.InvalidAadharException;
 import exception.UserExistException;
 import exception.WrongNumberException;
 import pkg.User;
-import pkg.Operations;
+import pkg.RegisterOperations;
 
 /**
  * Servlet implementation class RegisterationServlet
@@ -47,16 +47,13 @@ public class RegisterationServlet extends HttpServlet {
 		String aadharno = request.getParameter("aadhar");
 		String licenseno = request.getParameter("license");
 		boolean flag=false;
-		out.println("reached1");
-		Operations operate = new Operations();
-		out.println("reached test");
+		RegisterOperations operate = new RegisterOperations();
 		try {
 			if(operate.usernameCheck(username) &&
 			operate.mobileCheck(mobile) &&
 			operate.aadharCheck(aadharno)) {
 				
 				flag= true;
-				out.println("reached2");
 			}
 			
 		}catch(UserExistException ue) {
@@ -78,7 +75,6 @@ public class RegisterationServlet extends HttpServlet {
 		
 		if(flag) {
 			User user  = new User();
-			out.println("reached3");
 			user.setName(name);
 			user.setUsername(username);
 			user.setPassword(password);
@@ -86,12 +82,11 @@ public class RegisterationServlet extends HttpServlet {
 			user.setAadharno(aadharno);
 			user.setMobileno(mobile);
 			user.setLicenseno(licenseno);
-			out.println("reached4");
+			
 			boolean confirm=operate.registerUser(user);
-			out.println("reached5");
 			if(confirm) {
 				out.println("Registered Successfully!");
-				RequestDispatcher rd =  request.getRequestDispatcher("index.html");
+				RequestDispatcher rd =  request.getRequestDispatcher("Login.jsp");
 				rd.forward(request,response);
 			}
 		}
