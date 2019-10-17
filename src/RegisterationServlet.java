@@ -60,17 +60,20 @@ public class RegisterationServlet extends HttpServlet {
 			}
 			
 		}catch(UserExistException ue) {
-			out.println("User Already Exists..try another username..");
-			RequestDispatcher rd =  request.getRequestDispatcher("Registeration.html");
-			rd.include(request,response);
+			String msg ="User Already Exists..try another username..";
+			request.setAttribute("msg", msg);
+			RequestDispatcher rd =  request.getRequestDispatcher("Registeration.jsp");
+			rd.forward(request,response);
 		}catch(WrongNumberException ue) {
-			out.println("Mobile number entered is incorrect..Check and enter again");
-			RequestDispatcher rd =  request.getRequestDispatcher("Registeration.html");
-			rd.include(request,response);
+			String msg="Mobile number entered is incorrect..Check and enter again";
+			request.setAttribute("msg",msg);
+			RequestDispatcher rd =  request.getRequestDispatcher("/Registeration.html");
+			rd.forward(request,response);
 		}catch(InvalidAadharException ue) {
-			out.println("Aadhar number seems to be incorrect...check and try again..");
-			RequestDispatcher rd =  request.getRequestDispatcher("Registeration.html");
-			rd.include(request,response);
+			String msg = "Aadhar number seems to be incorrect...check and try again..";
+			request.setAttribute("msg", msg);
+			RequestDispatcher rd =  request.getRequestDispatcher("/Registeration.html");
+			rd.forward(request,response);
 		}
 		
 		if(flag) {

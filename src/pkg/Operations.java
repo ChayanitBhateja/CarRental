@@ -1,6 +1,7 @@
 package pkg;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -29,7 +30,7 @@ public class Operations {
 		factory = meta.getSessionFactoryBuilder().build(); 
 	}
 	public boolean mobileCheck(String mobileno) throws WrongNumberException{ 
-		int num = Integer.parseInt(mobileno);
+		long num = Long.parseLong(mobileno);
 		int count=0;
 		while(num>0) {
 			num=num/10;
@@ -43,13 +44,13 @@ public class Operations {
 		}
 	}
 	
-	@SuppressWarnings({ "unchecked" })
 	public boolean usernameCheck(String username) throws UserExistException{
-		List<User> list = null;
+		List<User> list = new ArrayList<>();
 		try{
 			session=factory.openSession();
 			tx = session.beginTransaction();
-			Query<User> query = session.createQuery("select tbl.tbl_reguser_username from tbl_reguser tbl where tbl.tbl_reguser_username=:u");
+			@SuppressWarnings("unchecked")
+			Query<User> query = session.createQuery("select user.username from User user where user.username=:u");
 			query.setParameter("u",username);
 			list = query.list();
 			tx.commit();
@@ -68,7 +69,7 @@ public class Operations {
 	}
 	
 	public boolean aadharCheck(String aadharno) throws InvalidAadharException {
-		int num = Integer.parseInt(aadharno);
+		Long num = Long.parseLong(aadharno);
 		int count=0;
 		while(num>0) {
 			num=num/10;

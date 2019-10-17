@@ -4,6 +4,7 @@
 	<title>Registeration Form</title>
 </head>
 <body>
+	<h3>${msg}</h2>
 	<form action="RegisterationServlet" method="get">
 		<TABLE>
 			<tr>
@@ -54,7 +55,6 @@
 					<input type="text" name="aadhar" required="required" placeholder="12 digit aadhar number">
 				</td>
 			</tr>
-			
 			
 			<tr>
 				<td>License Number</td>

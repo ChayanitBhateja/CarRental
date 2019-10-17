@@ -1,38 +1,45 @@
 package pkg;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Entity;
 
-
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "tbl_reguser")
-@SecondaryTable(name = "tbl_user_details", pkJoinColumns = @PrimaryKeyJoinColumn(name = "tbl_user_details_fk_reguser", referencedColumnName = "idtbl_fk_reguser"))
+@SecondaryTable(name = "tbl_user_details", pkJoinColumns = @PrimaryKeyJoinColumn(name = "tbl_user_details_fk_reguser", referencedColumnName = "idtbl_reguser"))
 
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idtbl_reguser")
+	@PrimaryKeyJoinColumn
 	int id;
+	
 	@Column(name = "tbl_reguser_name")
 	String name;
+	
 	@Column(name = "tbl_reguser_username")
 	String username;
+	
 	@Column(name = "tbl_regusercol")
 	String password;
+	
 	@Column(name = "tbl_user_details_mobile", table="tbl_user_details")
 	String mobileno;
+	
 	@Column(name = "tbl_user_details_aadharno", table="tbl_user_details")
 	String aadharno;
+	
 	@Column(name = "tbl_user_details_email", table="tbl_user_details")
 	String email;
+	
 	@Column(name = "tbl_user_details_liscenseno", table="tbl_user_details")
 	String licenseno;
 	
