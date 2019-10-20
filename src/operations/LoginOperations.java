@@ -1,7 +1,9 @@
 package operations;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,7 +13,9 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
+import entities.User;
 import exception.InvalidUserException;
+import exception.UserExistException;
 
 public class LoginOperations {
 	private SessionFactory factory;
@@ -33,6 +37,24 @@ public class LoginOperations {
 			return true;
 		else
 			return false;		
+	}
+	public String getName(String username) {
+		List<User> list = new ArrayList<>();
+		try{
+			session=factory.openSession();
+			tx = session.beginTransaction();
+			Query<User> query = session.createQuery("select user.name from User user where user.username=:u",User.class);
+			query.setParameter("u",username);
+			list = query.list();
+			tx.commit();
+		}catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      } finally {
+	         session.close(); 
+	      }	
+		String name = list.get(0).getName();
+		return name;
 	}	
 
 }
