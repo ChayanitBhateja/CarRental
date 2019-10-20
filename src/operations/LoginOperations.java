@@ -13,9 +13,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
-import entities.User;
 import exception.InvalidUserException;
-import exception.UserExistException;
 
 public class LoginOperations {
 	private SessionFactory factory;
@@ -33,17 +31,24 @@ public class LoginOperations {
 		Query<String> query = session.createQuery("select user.password from User user where user.username=: u");
 		query.setParameter("u", username);
 		List<String> list = query.list();
-		if(list.get(0).equals(password))
-			return true;
-		else
-			return false;		
+		if(!list.isEmpty()) {
+			if(list.get(0).equals(password))
+				return true;
+			else
+				throw new InvalidUserException();
+		}
+		else {
+			return false;	
+		}
 	}
+	
 	public String getName(String username) {
-		List<User> list = new ArrayList<>();
+		List<String> list = new ArrayList<>();
 		try{
 			session=factory.openSession();
 			tx = session.beginTransaction();
-			Query<User> query = session.createQuery("select user.name from User user where user.username=:u",User.class);
+			@SuppressWarnings("unchecked")
+			Query<String> query = session.createQuery("select user.name from User user where user.username=:u");
 			query.setParameter("u",username);
 			list = query.list();
 			tx.commit();
@@ -53,7 +58,7 @@ public class LoginOperations {
 	      } finally {
 	         session.close(); 
 	      }	
-		String name = list.get(0).getName();
+		String name = list.get(0);
 		return name;
 	}	
 

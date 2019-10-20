@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<%@ page session="false" %>
 	<title>Login Form</title>
 </head>
 <body>
