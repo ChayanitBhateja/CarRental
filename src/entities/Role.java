@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_tbl_role")
+	@Column(name = "idtbl_role")
 	int id;
 	
 	@Column(name = "tbl_rolename")
@@ -40,12 +40,17 @@ public class Role {
 		this.rolename = rolename;
 	}
 
-	public User getFkUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setFkUser(User fkUser) {
+	public void setUser(User fkUser) {
 		this.user = fkUser;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", rolename=" + rolename + ", user=" + user + "]";
 	}
 
 }

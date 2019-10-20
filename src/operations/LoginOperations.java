@@ -1,6 +1,7 @@
 package operations;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -22,30 +23,31 @@ public class LoginOperations {
 	public LoginOperations() {
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
-		factory = meta.getSessionFactoryBuilder().build(); 
+		factory = meta.getSessionFactoryBuilder().build();
+		session = factory.openSession();
 	}
 	public boolean validateUser(String username, String password) throws InvalidUserException{
-		session = factory.openSession();
+		
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		Query<String> query = session.createQuery("select user.password from User user where user.username=: u");
 		query.setParameter("u", username);
 		List<String> list = query.list();
-		if(!list.isEmpty()) {
-			if(list.get(0).equals(password))
-				return true;
-			else
-				throw new InvalidUserException();
-		}
-		else {
-			return false;	
-		}
+		tx.commit();
+		if(list.isEmpty()) 
+			throw new InvalidUserException();
+			else {
+				if(list.get(0).equals(password))
+					return true;
+				else
+					throw new InvalidUserException();
+			}
 	}
 	
 	public String getName(String username) {
 		List<String> list = new ArrayList<>();
 		try{
-			session=factory.openSession();
+//			session=factory.openSession();
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			Query<String> query = session.createQuery("select user.name from User user where user.username=:u");
@@ -60,6 +62,16 @@ public class LoginOperations {
 	      }	
 		String name = list.get(0);
 		return name;
+	}
+	public String getRole(String username) {
+		List<String> list = new ArrayList<>();
+		tx = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		Query<String> query = session.createQuery("select role.rolename from Role role where role.user.username=:u");
+		query.setParameter("u",username);
+		list = query.list();
+		tx.commit();
+		return list.get(0);
 	}	
 
 }

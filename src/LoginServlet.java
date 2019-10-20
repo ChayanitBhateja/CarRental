@@ -47,9 +47,9 @@ public class LoginServlet extends HttpServlet {
 			flag=operation.validateUser(username,password);
 		}
 		catch(InvalidUserException ue) {
-			String msg = "User Entered is Invalid.";
+			String msg = "Username/Password is Invalid.";
 			request.setAttribute("msg", msg);
-			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			rd.forward(request, response);
 		}
 		
@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 			
 			HttpSession oldsession  = request.getSession(false);
 			if(oldsession!=null) {
+				//ek barri invalidate krr dena hai...fir fresh cookies bhi le lenge...
 				System.out.println(oldsession.getAttribute("name"));
 				System.out.println(oldsession.getAttribute("loginToken"));
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
@@ -69,7 +70,10 @@ public class LoginServlet extends HttpServlet {
 				session.setMaxInactiveInterval(24*60*60);
 				Cookie cookie = new Cookie("loginToken",session.getId());
 				cookie.setMaxAge(24*60*60);
+				Cookie roleCookie = new Cookie("roleToken", operation.getRole(username));
+				roleCookie.setMaxAge(24*60*60);
 				response.addCookie(cookie);
+				response.addCookie(roleCookie);
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
 			}
