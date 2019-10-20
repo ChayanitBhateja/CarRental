@@ -1,4 +1,4 @@
-package pkg;
+package operations;
 
 
 import java.util.ArrayList;
@@ -14,6 +14,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
+import entities.Role;
+import entities.User;
 import exception.InvalidAadharException;
 import exception.UserExistException;
 import exception.WrongNumberException;
@@ -84,9 +86,14 @@ public class RegisterOperations {
 	public boolean registerUser(User user) {
 		boolean confirmed=false;
 		try{
+			Role role = new Role();
+			role.setRolename("customer");
+			role.setFkUser(user);
+			user.setRole(role);
 			session=factory.openSession();
-			tx=session.beginTransaction();;
+			tx=session.beginTransaction();
 			session.save(user);
+			session.save(role);
 			tx.commit();
 			confirmed=true;
 		}catch (HibernateException e) {

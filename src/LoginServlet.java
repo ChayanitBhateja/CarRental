@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import exception.InvalidUserException;
-
-import pkg.LoginOperations;
+import operations.LoginOperations;
 
 /**
  * Servlet implementation class LoginServlet

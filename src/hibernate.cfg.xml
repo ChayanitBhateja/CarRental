@@ -12,6 +12,7 @@
         <property name="connection.password">password</property>    
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>   
        
-        <mapping class="pkg.User" />  
+        <mapping class="entities.User" />
+        <mapping class="entities.Role" />  
     </session-factory>  
 </hibernate-configuration>  

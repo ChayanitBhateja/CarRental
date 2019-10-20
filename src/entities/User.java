@@ -1,10 +1,12 @@
-package pkg;
+package entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -43,6 +45,15 @@ public class User {
 	@Column(name = "tbl_user_details_liscenseno", table="tbl_user_details")
 	String licenseno;
 	
+	@OneToOne(mappedBy="user")
+	Role role;
+	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	public String getName() {
 		return name;
 	}

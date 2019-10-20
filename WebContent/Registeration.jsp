@@ -4,7 +4,7 @@
 	<title>Registeration Form</title>
 </head>
 <body>
-	<h3>${msg}</h2>
+	<h3>${msg}</h3>
 	<form action="RegisterationServlet" method="get">
 		<TABLE>
 			<tr>

@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.User;
 import exception.InvalidAadharException;
 import exception.UserExistException;
 import exception.WrongNumberException;
-import pkg.User;
-import pkg.RegisterOperations;
+import operations.RegisterOperations;
 
 /**
  * Servlet implementation class RegisterationServlet
