@@ -21,11 +21,11 @@ public class Role {
 	String rolename;
 	
 	@OneToOne(targetEntity = User.class)
-	@JoinColumn(name = "tbl_role_reguser")
+	@JoinColumn(name = "tbl_role_reguser", nullable = true)
 	User user;
 	
 	@OneToOne(targetEntity = Admin.class)
-	@JoinColumn(name = "tbl_role_admin")
+	@JoinColumn(name = "tbl_role_admin", nullable = true)
 	Admin admin;
 
 	public int getId() {

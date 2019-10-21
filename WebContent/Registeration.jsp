@@ -70,12 +70,12 @@
 			</tr>
 			<tr>
 				<td>
-					<a href="/CarRental/Login.html">Already a User?</a>
+					<a href="/CarRental/Login.jsp">Already a User?</a>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<a href="/CarRental/RegisterAdmin">Register admin</a>
+					<a href="/CarRental/RegisterAdmin.jsp">Register admin</a>
 				</td>
 			</tr>
 			

@@ -15,7 +15,7 @@
 					Name
 				</td>
 				<td>
-					<input type="text" name="adminName" placeholder="John Doe" required="required">
+					<input type="text" name="adminname" placeholder="John Doe" required="required">
 				</td>
 			</tr>
 			<tr>
@@ -37,6 +37,12 @@
 			<tr>
 				<td>
 					<input type="submit" name="submit" value="Register">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<a href="/CarRental/LoginAdmin.jsp">Registered Admins Login here</a>
 				</td>
 			</tr>
 		</table>

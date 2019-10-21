@@ -75,8 +75,6 @@ public class RegisterAdminOperations {
 		      }
 	        return confirmed;
 			
-		}
-		
-		
+		}		
 
 }

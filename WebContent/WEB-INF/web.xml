@@ -31,4 +31,14 @@
 <url-pattern>/NewServlet</url-pattern>
 </servlet-mapping>
 
+<servlet>
+<servlet-name>RegisterAdminServlet</servlet-name>
+<servlet-class>RegisterAdminServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>RegisterAdminServlet</servlet-name>
+<url-pattern>/RegisterAdminServlet</url-pattern>
+</servlet-mapping>
+
 </web-app>

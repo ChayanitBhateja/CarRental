@@ -14,5 +14,6 @@
        
         <mapping class="entities.User" />
         <mapping class="entities.Role" />  
+        <mapping class="entities.Admin" />
     </session-factory>  
 </hibernate-configuration>  
