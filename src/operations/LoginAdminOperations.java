@@ -29,7 +29,7 @@ public class LoginAdminOperations {
 		 Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
 		factory = meta.getSessionFactoryBuilder().build(); 
 	}
-	public String getRolename(String username) {
+	public String getRolename(String username) throws InvalidUserException{
 		
 		List<String> list = new ArrayList<>();
 		try{
@@ -46,8 +46,14 @@ public class LoginAdminOperations {
 	      } finally {
 	         session.close(); 
 	      }	
+		if(!list.isEmpty()) {
 		String name=list.get(0);
 		return name;
+		}
+		else {
+			throw new InvalidUserException();
+		}
+		
 	}
 	public boolean authenticateAdmin(String username, String password) throws InvalidUserException {
 		List<Admin> list = new ArrayList<>();
@@ -72,7 +78,7 @@ public class LoginAdminOperations {
 					return true;
 				}
 				else {
-					return false;
+					throw new InvalidUserException();
 				}
 		}
 		else {
