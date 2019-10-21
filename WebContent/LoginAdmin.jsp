@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h3> ${msg} </h3> <!-- to display any login error -->
-	<form action="LoginServlet" method="get">
+	<form action="LoginAdminServlet" method="get">
 		<table>
 			<tr>
 				<td>
@@ -29,11 +29,6 @@
 			<tr>
 				<td>
 					<input type="submit" name="login" value="Login">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="/CarRental/LoginAdmin.jsp">Admin Login Here</a>
 				</td>
 			</tr>
 		</table>

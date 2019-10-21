@@ -88,7 +88,7 @@ public class RegisterOperations {
 		try{
 			Role role = new Role();
 			role.setRolename("customer");
-			role.setFkUser(user);
+			role.setUser(user);
 			user.setRole(role);
 			session=factory.openSession();
 			tx=session.beginTransaction();

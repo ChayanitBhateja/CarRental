@@ -57,7 +57,6 @@ public class LoginServlet extends HttpServlet {
 			
 			HttpSession oldsession  = request.getSession(false);
 			if(oldsession!=null) {
-				//ek barri invalidate krr dena hai...fir fresh cookies bhi le lenge...
 				System.out.println(oldsession.getAttribute("name"));
 				System.out.println(oldsession.getAttribute("loginToken"));
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");

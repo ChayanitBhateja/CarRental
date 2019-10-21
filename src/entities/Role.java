@@ -23,6 +23,10 @@ public class Role {
 	@OneToOne(targetEntity = User.class)
 	@JoinColumn(name = "tbl_role_reguser")
 	User user;
+	
+	@OneToOne(targetEntity = Admin.class)
+	@JoinColumn(name = "tbl_role_admin")
+	Admin admin;
 
 	public int getId() {
 		return id;
@@ -51,6 +55,16 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", rolename=" + rolename + ", user=" + user + "]";
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+		
+	}
+	
+	public Admin getAdmin() {
+		return admin;
+		
 	}
 
 }

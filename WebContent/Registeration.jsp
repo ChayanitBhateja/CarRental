@@ -73,6 +73,12 @@
 					<a href="/CarRental/Login.html">Already a User?</a>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<a href="/CarRental/RegisterAdmin">Register admin</a>
+				</td>
+			</tr>
+			
 		</TABLE>
 	</form>
 </body>
