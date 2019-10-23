@@ -47,6 +47,9 @@ public class User {
 	@OneToOne(mappedBy="user")
 	Role role;
 	
+	@OneToOne(mappedBy="user")
+	Query query;
+	
 	public Role getRole() {
 		return role;
 	}

@@ -15,5 +15,7 @@
         <mapping class="entities.User" />
         <mapping class="entities.Role" />  
         <mapping class="entities.Admin" />
+        <mapping class="entities.Booking" />
+        <mapping class="entities.Query" />
     </session-factory>  
 </hibernate-configuration>  
