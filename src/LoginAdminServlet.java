@@ -42,7 +42,7 @@ public class LoginAdminServlet extends HttpServlet {
 		} catch (InvalidUserException e1) {
 			String msg = "Can't Authenticate Username/Password is Invalid.";
 			request.setAttribute("msg",msg);
-			RequestDispatcher rd = request.getRequestDispatcher("LoginAdmin.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 			rd.forward(request,response);
 		}
 		if(!response.isCommitted()) {
