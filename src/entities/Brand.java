@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -21,9 +20,6 @@ public class Brand {
 	@Column(name="tbl_vehicle_brandname")
 	String name;
 	
-	@OneToOne(mappedBy="brand")
-	Vehicle vehicle;
-	
 	public int getId() {
 		return id;
 	}
@@ -38,13 +34,5 @@ public class Brand {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
 	}
 }

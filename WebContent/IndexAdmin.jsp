@@ -107,5 +107,6 @@
 		</table>
 	</form>
 	<h3>${msgvehicle}</h3>
+	<a href="ManagePortal.jsp">Manage Brand and Vehicles here</a>
 </body>
 </html>

@@ -35,23 +35,22 @@ public class IndexAdminServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		IndexAdminOperations op = new IndexAdminOperations();
 		String submitbrand = request.getParameter("submitbrand");
-		String submitVehicle = request.getParameter("submitVehicle");
+		String submitVehicle = request.getParameter("submitvehicle");
 		if(submitbrand!=null) {
-		String brandName = request.getParameter("brandname");
-		Brand brand = new Brand();
-		brand.setName(brandName);
-		boolean flag = op.addBrand(brand);
-		RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
-		String msgBrand;
-		if(flag) {
-			msgBrand = "Brand added successfully!";
-		}
-		else {
-			msgBrand = "Brand adding unsuccessful!";
-			
-		}
-		request.setAttribute("msgbrand",msgBrand);
-		rd.forward(request, response);
+			String brandName = request.getParameter("brandname");
+			Brand brand = new Brand();
+			brand.setName(brandName);
+			boolean flag = op.addBrand(brand);
+			RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
+			String msgBrand;
+			if(flag) {
+				msgBrand = "Brand added successfully!";
+			}
+			else {
+				msgBrand = "Brand adding unsuccessful!";	
+			}
+			request.setAttribute("msgbrand",msgBrand);
+			rd.forward(request, response);
 		}
 		else if(submitVehicle!=null && submitbrand == null) {
 			String name = request.getParameter("name");
@@ -62,7 +61,6 @@ public class IndexAdminServlet extends HttpServlet {
 			try {
 				brand = op.getBrandByName(brandname);
 			} catch (NoBrandAvailableException e) {
-				// TODO Auto-generated catch block
 				RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
 				msgvehicle = "No brand found with this name/it must have been deleted..";
 				request.setAttribute("msgbrand",msgvehicle);
@@ -73,12 +71,13 @@ public class IndexAdminServlet extends HttpServlet {
 			vehicle.setNumber(number);
 			vehicle.setBrand(brand);
 			boolean flag = op.addVehicle(vehicle);
+			RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
 			if(flag) {
 				msgvehicle="Vehicle Adding Successful";
 			}
 			else
 				msgvehicle="Vehicle Adding Unsuccessful";
-			RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
+			
 			request.setAttribute("msgvehicle",msgvehicle);
 			rd.forward(request, response);
 		}
