@@ -154,8 +154,11 @@ public class IndexAdminOperations {
 		try {
 			session = factory.openSession();
 			tx = session.beginTransaction();
+			Query<Long> query1 = session.createQuery("delete Vehicle where from Brand where name=:name1");
 			Query<Long> query = session.createQuery("delete Brand where name=:name1");
+			query1.setParameter("name1",name);
 			query.setParameter("name1",name);
+			flag=query1.executeUpdate();
 			flag=query.executeUpdate();
 			tx.commit();
 			}catch (HibernateException e) {
@@ -184,6 +187,32 @@ public class IndexAdminOperations {
 			}	
 		if(!list.isEmpty())
 			return list;
+		else
+			throw new NoVehicleException();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public Vehicle displayVehicleByNumber(String number) throws NoVehicleException{
+		List<Vehicle> list = new ArrayList<>();
+		Vehicle vehicle=null;
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Vehicle> query = session.createQuery("from Vehicle where number=:num1");
+			query.setParameter("num1",number);
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty()) {
+			vehicle = list.get(0);
+			return vehicle;
+		}
 		else
 			throw new NoVehicleException();
 	}
