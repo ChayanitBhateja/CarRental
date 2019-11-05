@@ -65,12 +65,19 @@ public class LoginOperations {
 	}
 	public String getRole(String username) {
 		List<String> list = new ArrayList<>();
-		tx = session.beginTransaction();
-		@SuppressWarnings("unchecked")
-		Query<String> query = session.createQuery("select role.rolename from Role role where role.user.username=:u");
-		query.setParameter("u",username);
-		list = query.list();
-		tx.commit();
+		try{
+			tx = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			Query<String> query = session.createQuery("select role.rolename from Role role where role.user.username=:u");
+			query.setParameter("u",username);
+			list = query.list();
+			tx.commit();
+		}catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      } finally {
+	         session.close(); 
+	      }	
 		return list.get(0);
 	}	
 

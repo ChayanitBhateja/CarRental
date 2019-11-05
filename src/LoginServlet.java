@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
 			else {
 				HttpSession session = request.getSession();
 				session.setAttribute("name", operation.getName(username));
+				session.setAttribute("username",username);
 				session.setAttribute("loginToken", session.getId());
 				session.setMaxInactiveInterval(24*60*60);
 				Cookie cookie = new Cookie("loginToken",session.getId());

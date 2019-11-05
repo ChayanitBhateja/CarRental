@@ -11,6 +11,8 @@
 </head>
 <body>
 	<h1>Edit Portal</h1>
+	<a href="IndexAdmin.jsp">Go back to Admin Portal here..</a>
+	<br>
 	<b>Edit Brand</b>
 	<% IndexAdminOperations op = new IndexAdminOperations(); %>
 	<form action="ManagePortal.jsp" method="get">
