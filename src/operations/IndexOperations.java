@@ -51,4 +51,21 @@ public class IndexOperations {
 			throw new InvalidUserException();
 		}
 	}
+	
+	public boolean addQuery(entities.Query query) {
+		boolean flag=false;
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			session.save(query);
+			tx.commit();
+			flag=true;
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		return flag;
+	}
 }
