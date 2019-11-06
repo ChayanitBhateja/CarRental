@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,11 +21,11 @@ public class Booking {
 	@Column(name = "tbl_booking_status")
 	String status;
 	
-	@OneToOne(targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "tbl_booking_fk_reguser", nullable = true)
 	User user;
 	
-	@OneToOne(targetEntity = Vehicle.class)
+	@ManyToOne(targetEntity = Vehicle.class)
 	@JoinColumn(name = "tbl_booking_fk_vehicle", nullable = true)
 	Vehicle vehicle;
 

@@ -14,9 +14,12 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 
+import entities.Booking;
 import entities.Brand;
 import entities.Vehicle;
+import exception.NoBookingAvailableException;
 import exception.NoBrandAvailableException;
+import exception.NoQueryAvailableException;
 import exception.NoVehicleException;
 
 public class IndexAdminOperations {
@@ -216,7 +219,171 @@ public class IndexAdminOperations {
 			return brand;
 		}	
 		else
-			throw new NoBrandAvailableException();
-		
+			throw new NoBrandAvailableException();		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<entities.Query> getQueries() throws NoQueryAvailableException{
+		List<entities.Query> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<entities.Query> query = session.createQuery("from Query where status='0'");
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty())
+			return list;
+		else
+			throw new NoQueryAvailableException();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public entities.Query getQueryById(int id) throws NoQueryAvailableException {
+		List<entities.Query> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<entities.Query> query = session.createQuery("from Query where id=:id");
+			query.setParameter("id", id);
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty())
+			return list.get(0);
+		else
+			throw new NoQueryAvailableException();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int updateQueryStatus(entities.Query query) {
+		int flag=0;
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<entities.Query> query1 = session.createQuery("update Query set status='1' where id=:id");
+			query1.setParameter("id", query.getId());
+			flag=query1.executeUpdate();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		return flag;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Booking> getBookings() throws NoBookingAvailableException {
+		List<Booking> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Booking> query = session.createQuery("from Booking where status='0'");
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty())
+			return list;
+		else
+			throw new NoBookingAvailableException();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Booking getBookingById(int id) throws NoBookingAvailableException {
+		List<Booking> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Booking> query = session.createQuery("from Booking where id=:id");
+			query.setParameter("id", id);
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty())
+			return list.get(0);
+		else
+			throw new NoBookingAvailableException();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int updateBookingStatus(Booking booking) {
+		int flag=0;
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Booking> query1 = session.createQuery("update Booking set status='1' where id=:id");
+			query1.setParameter("id", booking.getId());
+			flag=query1.executeUpdate();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		return flag;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public int cancelBookingStatus(Booking booking) {
+		int flag=0;
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Booking> query1 = session.createQuery("update Booking set status='-1' where id=:id");
+			query1.setParameter("id", booking.getId());
+			flag=query1.executeUpdate();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		return flag;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Vehicle displayVehicleByNumber(String number) throws NoVehicleException {
+		List<Vehicle> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query<Vehicle> query = session.createQuery("from Vehicle where number=:number");
+			query.setParameter("number",number);
+			list=query.list();
+			tx.commit();
+			}catch (HibernateException e) {
+				if (tx!=null) tx.rollback();
+				e.printStackTrace(); 
+			} finally {
+				session.close(); 
+			}	
+		if(!list.isEmpty())
+			return list.get(0);
+		else
+			throw new NoVehicleException();
 	}
 }

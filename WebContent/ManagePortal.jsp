@@ -81,7 +81,13 @@
 		<% String number1 = request.getParameter("number");
 			String submitbtn1 = request.getParameter("submitVupdate");
 			if(submitbtn1!=null && number1!=null){
-			Vehicle vehicle = op.displayVehicleByNumber(number1);%>
+				Vehicle vehicle=null;
+				try{
+			vehicle = op.displayVehicleByNumber(number1);
+			}
+			catch(Exception e){
+				out.println("No vehicle found with this number");
+			} %>
 			<form action="ManagePortal.jsp" method="get">
 				Number
 				<input type="text" name="number2" value= <%= vehicle.getNumber() %> >

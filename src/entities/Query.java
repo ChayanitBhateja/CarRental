@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +23,7 @@ public class Query {
 	@Column(name = "tbl_query_desc")
 	String description;
 	
-	@OneToOne(targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "tbl_query_fk_reguser", nullable = true)
 	User user;
 

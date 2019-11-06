@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
@@ -47,11 +50,11 @@ public class User {
 	@OneToOne(mappedBy="user")
 	Role role;
 	
-	@OneToOne(mappedBy="user")
-	Query query;
+	@OneToMany(mappedBy="user")
+	Set<Query> query;
 
-	@OneToOne(mappedBy="user")
-	Booking booking;
+	@OneToMany(mappedBy="user")
+	Set<Booking> booking;
 	
 	public Role getRole() {
 		return role;
@@ -106,17 +109,17 @@ public class User {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Query getQuery() {
+	}	
+	public Set<Query> getQuery() {
 		return query;
 	}
-	public void setQuery(Query query) {
+	public void setQuery(Set<Query> query) {
 		this.query = query;
 	}
-	public Booking getBooking() {
+	public Set<Booking> getBooking() {
 		return booking;
 	}
-	public void setBooking(Booking booking) {
+	public void setBooking(Set<Booking> booking) {
 		this.booking = booking;
 	}
 	@Override

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -32,8 +32,8 @@ public class Vehicle {
 	@JoinColumn(name="tbl_vehicle_brand")
 	Brand brand;
 
-	@OneToOne(mappedBy="vehicle")
-	Booking booking;
+	@OneToMany(mappedBy="vehicle")
+	Set<Booking> booking;
 
 	public int getId() {
 		return id;
@@ -65,6 +65,14 @@ public class Vehicle {
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	public Set<Booking> getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Set<Booking> booking) {
+		this.booking = booking;
 	}
 
 
