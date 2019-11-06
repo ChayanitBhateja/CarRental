@@ -24,16 +24,24 @@ public class LoginOperations {
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();  
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();  
 		factory = meta.getSessionFactoryBuilder().build();
-		session = factory.openSession();
 	}
 	public boolean validateUser(String username, String password) throws InvalidUserException{
-		
+		List<String> list=null;
+		try {
+		session = factory.openSession();
 		tx = session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		Query<String> query = session.createQuery("select user.password from User user where user.username=: u");
 		query.setParameter("u", username);
-		List<String> list = query.list();
+		list = query.list();
 		tx.commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
 		if(list.isEmpty()) 
 			throw new InvalidUserException();
 			else {
@@ -47,7 +55,7 @@ public class LoginOperations {
 	public String getName(String username) {
 		List<String> list = new ArrayList<>();
 		try{
-//			session=factory.openSession();
+			session=factory.openSession();
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			Query<String> query = session.createQuery("select user.name from User user where user.username=:u");
@@ -66,6 +74,7 @@ public class LoginOperations {
 	public String getRole(String username) {
 		List<String> list = new ArrayList<>();
 		try{
+			session = factory.openSession();
 			tx = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			Query<String> query = session.createQuery("select role.rolename from Role role where role.user.username=:u");

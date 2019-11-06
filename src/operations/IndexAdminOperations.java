@@ -170,74 +170,7 @@ public class IndexAdminOperations {
 		return flag;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Vehicle> displayVehicle() throws NoVehicleException{
-		List<Vehicle> list = new ArrayList<>();
-		try {
-			session = factory.openSession();
-			tx = session.beginTransaction();
-			Query<Vehicle> query = session.createQuery("from vehicle");
-			list=query.list();
-			tx.commit();
-			}catch (HibernateException e) {
-				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
-			} finally {
-				session.close(); 
-			}	
-		if(!list.isEmpty())
-			return list;
-		else
-			throw new NoVehicleException();
-	}
 	
-	
-	@SuppressWarnings("unchecked")
-	public Vehicle displayVehicleByNumber(String number) throws NoVehicleException{
-		List<Vehicle> list = new ArrayList<>();
-		Vehicle vehicle=null;
-		try {
-			session = factory.openSession();
-			tx = session.beginTransaction();
-			Query<Vehicle> query = session.createQuery("from Vehicle where number=:num1");
-			query.setParameter("num1",number);
-			list=query.list();
-			tx.commit();
-			}catch (HibernateException e) {
-				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
-			} finally {
-				session.close(); 
-			}	
-		if(!list.isEmpty()) {
-			vehicle = list.get(0);
-			return vehicle;
-		}
-		else
-			throw new NoVehicleException();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Vehicle> displayVehiceByType(String name) throws NoVehicleException{
-		List<Vehicle> list = new ArrayList<>();
-		try {
-			session = factory.openSession();
-			tx = session.beginTransaction();
-			Query<Vehicle> query = session.createQuery("from Vehicle where brand=:name1");
-			query.setParameter("name1",name);
-			list=query.list();
-			tx.commit();
-			}catch (HibernateException e) {
-				if (tx!=null) tx.rollback();
-				e.printStackTrace(); 
-			} finally {
-				session.close(); 
-			}	
-		if(!list.isEmpty())
-			return list;
-		else
-			throw new NoVehicleException();
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Brand> displayBrand() throws NoBrandAvailableException{

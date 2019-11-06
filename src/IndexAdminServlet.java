@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,16 +58,18 @@ public class IndexAdminServlet extends HttpServlet {
 			String number = request.getParameter("number");
 			String brandname = request.getParameter("cars"); 
 			Brand brand = null;
+			Vehicle vehicle = new Vehicle(); 
 			String msgvehicle;
 			try {
 				brand = op.getBrandByName(brandname);
+				brand= vehicle.getBrand();
 			} catch (NoBrandAvailableException e) {
 				RequestDispatcher rd = request.getRequestDispatcher("IndexAdmin.jsp");
 				msgvehicle = "No brand found with this name/it must have been deleted..";
 				request.setAttribute("msgbrand",msgvehicle);
 				rd.forward(request, response);
 			}
-			Vehicle vehicle = new Vehicle();
+			
 			vehicle.setName(name);
 			vehicle.setNumber(number);
 			vehicle.setBrand(brand);

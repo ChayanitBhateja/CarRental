@@ -24,6 +24,10 @@ public class Booking {
 	@OneToOne(targetEntity = User.class)
 	@JoinColumn(name = "tbl_booking_fk_reguser", nullable = true)
 	User user;
+	
+	@OneToOne(targetEntity = Vehicle.class)
+	@JoinColumn(name = "tbl_booking_fk_vehicle", nullable = true)
+	Vehicle vehicle;
 
 	public int getId() {
 		return id;
@@ -47,6 +51,14 @@ public class Booking {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 	
 }

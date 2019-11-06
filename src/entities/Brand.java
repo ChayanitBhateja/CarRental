@@ -1,10 +1,13 @@
 package entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -21,8 +24,8 @@ public class Brand {
 	@Column(name="tbl_vehicle_brandname")
 	String name;
 	
-	@OneToOne(mappedBy="brand")
-	Vehicle vehicle;
+	@OneToMany(mappedBy="brand")
+	Set<Vehicle> vehicle;
 	
 	public int getId() {
 		return id;
@@ -38,5 +41,13 @@ public class Brand {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Vehicle> getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Set<Vehicle> vehicle) {
+		this.vehicle = vehicle;
 	}
 }

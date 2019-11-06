@@ -49,6 +49,9 @@ public class User {
 	
 	@OneToOne(mappedBy="user")
 	Query query;
+
+	@OneToOne(mappedBy="user")
+	Booking booking;
 	
 	public Role getRole() {
 		return role;
@@ -97,6 +100,24 @@ public class User {
 	}
 	public void setLicenseno(String licenseno) {
 		this.licenseno = licenseno;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Query getQuery() {
+		return query;
+	}
+	public void setQuery(Query query) {
+		this.query = query;
+	}
+	public Booking getBooking() {
+		return booking;
+	}
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 	@Override
 	public String toString() {
